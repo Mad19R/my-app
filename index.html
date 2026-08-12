@@ -1,26 +1,20 @@
-openapi: 3.0.0
-info:
-  title: API Сервиса Пользователей
-  description: Учебная спецификация API для демонстрации на GitHub Pages
-  version: 1.0.0
-paths:
-  /users:
-    get:
-      summary: Получить список пользователей
-      responses:
-        '200':
-          description: Успешный ответ со списком
-  /users/{id}:
-    get:
-      summary: Получить информацию о пользователе по ID
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Данные пользователя найдена
-        '404':
-          description: Пользователь не найден
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>API Documentation</title>
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+</head>
+<body>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+    <script>
+        window.onload = () => {
+            window.ui = SwaggerUIBundle({
+                url: './openapi.yaml',
+                dom_id: '#swagger-ui',
+            });
+        };
+    </script>
+</body>
+</html>
