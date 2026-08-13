@@ -1,0 +1,85 @@
+{
+  "info": {
+    "_postman_id": "8cf72934-cc82-4913-a8cb-1bf42c21a9c5",
+    "name": "Testing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34361534"
+  },
+  "item": [
+    {
+      "name": "Get Users",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Created Users",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Test",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          "// 1. Проверяем, что сервер вернул HTTP 200 OK\r",
+          "pm.test(\"Status code is 200 OK\", function () {\r",
+          "    pm.response.to.have.status(200);\r",
+          "});\r",
+          "\r",
+          "// 2. Проверяем, что время ответа меньше 3000 мс (с учетом прогрева Render)\r",
+          "pm.test(\"Response time is less than 3000ms\", function () {\r",
+          "    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+          "});\r",
+          "\r",
+          "// 3. Проверяем, что ответ — это массив объектов и содержит обязательные поля\r",
+          "pm.test(\"Response contains array of users with valid fields\", function () {\r",
+          "    const jsonData = pm.response.json();\r",
+          "    pm.expect(jsonData).to.be.an('array');\r",
+          "    \r",
+          "    if (jsonData.length > 0) {\r",
+          "        const firstUser = jsonData[0];\r",
+          "        pm.expect(firstUser).to.have.property('id');\r",
+          "        pm.expect(firstUser).to.have.property('name');\r",
+          "        pm.expect(firstUser).to.have.property('email');\r",
+          "    }\r",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BaseURL",
+      "value": ""
+    }
+  ]
+}
