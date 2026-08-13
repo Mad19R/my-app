@@ -1,18 +1,35 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
-  title: API Сервиса Пользователей
-  description: Учебная спецификация API для демонстрации на GitHub Pages
-  version: 1.0.0
+  title: E-Commerce Analytics & Management API
+  description: Спецификация API системы управления пользователями и заказами с интеграцией PostgreSQL.
+  version: 2.0.0
+servers:
+  - url: https://my-backend-534k.onrender.com
+    description: Production Environment (Render)
 paths:
   /users:
     get:
-      summary: Получить список пользователей
+      summary: Список пользователей
       responses:
         '200':
-          description: Успешный ответ со списком
+          description: Успешный запрос
+    post:
+      summary: Создать пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+      responses:
+        '201':
+          description: Пользователь создан
+        '400':
+          description: Ошибка валидации или дубликат Email
+
   /users/{id}:
     get:
-      summary: Получить информацию о пользователе по ID
+      summary: Получить пользователя по ID
       parameters:
         - name: id
           in: path
@@ -21,6 +38,96 @@ paths:
             type: integer
       responses:
         '200':
-          description: Данные пользователя найдена
+          description: Данные найдены
         '404':
           description: Пользователь не найден
+    put:
+      summary: Обновить пользователя
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: Данные обновлены
+    delete:
+      summary: Удалить пользователя
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Пользователь удален
+
+  /orders:
+    get:
+      summary: Список заказов с деталями (JOIN)
+      responses:
+        '200':
+          description: Список заказов
+    post:
+      summary: Создать новый заказ
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreate'
+      responses:
+        '201':
+          description: Заказ создан
+
+components:
+  schemas:
+    UserCreate:
+      type: object
+      required:
+        - name:
+        - email
+      properties:
+        name:
+          type: string
+          example: Иван Петров
+        email:
+          type: string
+          format: email
+          example: ivan@example.com
+
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Иван Сидоров
+        email:
+          type: string
+          format: email
+          example: newemail@example.com
+
+    OrderCreate:
+      type: object
+      required:
+        - user_id
+        - product_id
+        - quantity
+      properties:
+        user_id:
+          type: integer
+          example: 1
+        product_id:
+          type: integer
+          example: 1
+        quantity:
+          type: integer
+          example: 2
