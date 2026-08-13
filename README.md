@@ -64,11 +64,19 @@
 
 ---
 
+````markdown
+# E-Commerce Analytics & Management API Documentation
+
+Демонстрационный проект системного и бизнес-аналитика. Проект представляет собой интерактивную документацию OpenAPI (Swagger UI), задеплоенную на GitHub Pages, с автоматизированным CI/CD тестированием (Newman), REST API на Python и облачной реляционной базой данных PostgreSQL.
+
+🔗 **Live Demo (Swagger UI):** [https://mad19r.github.io/my-app/](https://mad19r.github.io/my-app/)  
+⚙️ **Production API (Render):** `https://my-backend-534k.onrender.com`
+
+---
+
 ## 📐 1. Архитектура системы (Sequence Diagram)
 
-Ниже представлена диаграмма последовательности, описывающая сквозное взаимодействие между клиентом, спецификацией, бэкендом и базой данных при выполнении запросов:
-
-
+```mermaid
 sequenceDiagram
     autonumber
     actor Client as Пользователь / Swagger UI
@@ -80,15 +88,13 @@ sequenceDiagram
     Client->>GHP: Запрос страницы /my-app
     GHP-->>Client: Чтение openapi.yaml и отрисовка Swagger UI
 
-    Note over Client, DB: Выполнение API запросов (например, GET /orders)
+    Note over Client, DB: Выполнение API запросов
     Client->>API: HTTP GET /orders
     API->>DB: SQL SELECT (JOIN users, products, orders)
     DB-->>API: Набор строк (Raw Data)
     API-->>Client: HTTP 200 OK (JSON Массив)
 
-
-
-    erDiagram
+erDiagram
     USERS ||--o{ ORDERS : "places"
     PRODUCTS ||--o{ ORDERS : "included_in"
 
@@ -114,13 +120,4 @@ sequenceDiagram
         string status "DEFAULT 'created'"
         timestamp created_at "DEFAULT CURRENT_TIMESTAMP"
     }
-
-
-
-    flowchart LR
-    A[Git Push in my-app] --> B[GitHub Actions Pipeline]
-    B --> C[Install Node.js & Newman]
-    C --> D[Run postman_collection.json]
-    D --> E{Tests Status}
-    E -- Pass --> F[Green Build Status]
-    E -- Fail --> G[Red Build Alert]
+    ```

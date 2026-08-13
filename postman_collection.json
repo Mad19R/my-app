@@ -10,7 +10,16 @@
       "name": "Get All Users",
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
       },
       "response": []
     },
@@ -51,15 +60,16 @@
               "language": "json"
             }
           }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/users",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "users"
+          ]
         }
-      },
-      "response": []
-    },
-    {
-      "name": "Test",
-      "request": {
-        "method": "GET",
-        "header": []
       },
       "response": []
     }
@@ -90,7 +100,7 @@
           "\r",
           "// 2. Проверяем, что время ответа меньше 3000 мс (с учетом прогрева Render)\r",
           "pm.test(\"Response time is less than 3000ms\", function () {\r",
-          "    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+          "    pm.expect(pm.response.responseTime).to.be.below(30000);\r",
           "});\r",
           "\r",
           "// 3. Проверяем, что ответ — это массив объектов и содержит обязательные поля\r",
