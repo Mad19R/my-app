@@ -51,20 +51,17 @@
         {
           "listen": "test",
           "script": {
-            "exec": [
-              "pm.test(\"Status code is 201 Created\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Response contains created user object\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData).to.be.an('object');\r",
-              "    pm.expect(jsonData).to.have.property('id');\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
+           "exec": [
+    "pm.test(\"Status code is 201 Created\", function () {\n",
+    "    pm.response.to.have.status(201);\n",
+    "});\n",
+    "\n",
+    "pm.test(\"Response contains created user object\", function () {\n",
+    "    const jsonData = pm.response.json();\n",
+    "    pm.expect(jsonData).to.be.an('object');\n",
+    "    pm.expect(jsonData).to.have.property('id');\n",
+    "});"
+]
           }
         }
       ],
