@@ -65,6 +65,10 @@
           {
             "key": "Content-Type",
             "value": "application/json"
+          },
+          {
+            "key": "X-API-Key",
+            "value": "my-secret-key-123"
           }
         ],
         "body": {

@@ -11,7 +11,7 @@ paths:
     get:
       summary: Список пользователей
       responses:
-        '200':
+        "200":
           description: Успешный запрос
     post:
       summary: Создать пользователя
@@ -20,11 +20,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserCreate'
+              $ref: "#/components/schemas/UserCreate"
       responses:
-        '201':
+        "201":
           description: Пользователь создан
-        '400':
+        "400":
           description: Ошибка валидации или дубликат Email
 
   /users/{id}:
@@ -37,9 +37,9 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: Данные найдены
-        '404':
+        "404":
           description: Пользователь не найден
     put:
       summary: Обновить пользователя
@@ -54,9 +54,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserUpdate'
+              $ref: "#/components/schemas/UserUpdate"
       responses:
-        '200':
+        "200":
           description: Данные обновлены
     delete:
       summary: Удалить пользователя
@@ -67,14 +67,14 @@ paths:
           schema:
             type: integer
       responses:
-        '204':
+        "204":
           description: Пользователь удален
 
   /orders:
     get:
       summary: Список заказов с деталями (JOIN)
       responses:
-        '200':
+        "200":
           description: Список заказов
     post:
       summary: Создать новый заказ
@@ -83,9 +83,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OrderCreate'
+              $ref: "#/components/schemas/OrderCreate"
       responses:
-        '201':
+        "201":
           description: Заказ создан
 
 components:
@@ -131,3 +131,13 @@ components:
         quantity:
           type: integer
           example: 2
+components:
+  securitySchemes:
+    ApiKeyAuth:
+    type: apikey
+    in: header
+    name: X-API-key
+    description: "введите секретный ключ: my-secret-key-123"
+
+security:
+  - ApiKeyAuth: []
