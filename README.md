@@ -1,4 +1,4 @@
-# E-Commerce Analytics & Management API Documentation
+# Analytics & Management API Documentation
 
 Публичный демонстрационный проект системного и бизнес-аналитика. Проект представляет собой интерактивную документацию OpenAPI (Swagger UI), задеплоенную на GitHub Pages и интегрированную с действующим REST API и облачной релянционной базой данных PostgreSQL.
 
@@ -10,8 +10,8 @@
 
 
 * **Frontend / Docs:** GitHub Pages, Swagger UI Dist.
-* **Backend:** Python 3, FastAPI, Uvicorn, psycopg2.
-* **Database:** PostgreSQL (Neon Serverless DB).
+* **Backend:** Python 3, FastAPI, Uvicorn, psycopg2. 
+* **Database:** PostgreSQL (Neon Serverless DB). https://console.neon.tech/app/projects/small-breeze-79092907
 * **Specification:** OpenAPI 3.0.3.
 
 ---
