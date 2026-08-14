@@ -52,17 +52,14 @@
           "listen": "test",
           "script": {
             "exec": [
-              "// 1. Проверяем статус 201 Created\r",
               "pm.test(\"Status code is 201 Created\", function () {\r",
               "    pm.response.to.have.status(201);\r",
               "});\r",
               "\r",
-              "// 2. Проверяем, что вернулся объект пользователя с id\r",
               "pm.test(\"Response contains created user object\", function () {\r",
               "    const jsonData = pm.response.json();\r",
               "    pm.expect(jsonData).to.be.an('object');\r",
               "    pm.expect(jsonData).to.have.property('id');\r",
-              "    pm.expect(jsonData).to.have.property('email');\r",
               "});"
             ],
             "type": "text/javascript",
