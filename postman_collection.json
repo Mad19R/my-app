@@ -1,9 +1,7 @@
 {
   "info": {
-    "_postman_id": "8cf72934-cc82-4913-a8cb-1bf42c21a9c5",
-    "name": "Testing API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "34361534"
+    "name": "API Automated Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -13,18 +11,16 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 200 OK\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Response contains array of users\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData).to.be.an('array');\r",
+              "pm.test(\"Status code is 200 OK\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response contains array of users\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an('array');",
               "});"
             ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
+            "type": "text/javascript"
           }
         }
       ],
@@ -40,8 +36,7 @@
             "users"
           ]
         }
-      },
-      "response": []
+      }
     },
     {
       "name": "Created Users",
@@ -50,33 +45,31 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Status code is 201 Created\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Response contains created user object\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData).to.be.an('object');\r",
-              "    pm.expect(jsonData).to.have.property('id');\r",
+              "pm.test(\"Status code is 201 Created\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test(\"Response contains created user object\", function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an('object');",
+              "    pm.expect(jsonData).to.have.property('id');",
               "});"
             ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
+            "type": "text/javascript"
           }
         }
       ],
       "request": {
         "method": "POST",
-        "header": [],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"name\": \"Test User {{$randomFirstName}}\",\r\n  \"email\": \"autotest_{{$randomEmail}}\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
+          "raw": "{\n  \"name\": \"Test User {{$randomFirstName}}\",\n  \"email\": \"autotest_{{$randomEmail}}\"\n}"
         },
         "url": {
           "raw": "{{baseUrl}}/users",
@@ -87,59 +80,7 @@
             "users"
           ]
         }
-      },
-      "response": []
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          ""
-        ]
       }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "type": "text/javascript",
-        "packages": {},
-        "requests": {},
-        "exec": [
-          "// 1. Проверяем, что сервер вернул HTTP 200 OK\r",
-          "pm.test(\"Status code is 200 OK\", function () {\r",
-          "    pm.response.to.have.status(200);\r",
-          "});\r",
-          "\r",
-          "// 2. Проверяем, что время ответа меньше 3000 мс (с учетом прогрева Render)\r",
-          "pm.test(\"Response time is less than 3000ms\", function () {\r",
-          "    pm.expect(pm.response.responseTime).to.be.below(30000);\r",
-          "});\r",
-          "\r",
-          "// 3. Проверяем, что ответ — это массив объектов и содержит обязательные поля\r",
-          "pm.test(\"Response contains array of users with valid fields\", function () {\r",
-          "    const jsonData = pm.response.json();\r",
-          "    pm.expect(jsonData).to.be.an('array');\r",
-          "    \r",
-          "    if (jsonData.length > 0) {\r",
-          "        const firstUser = jsonData[0];\r",
-          "        pm.expect(firstUser).to.have.property('id');\r",
-          "        pm.expect(firstUser).to.have.property('name');\r",
-          "        pm.expect(firstUser).to.have.property('email');\r",
-          "    }\r",
-          "});"
-        ]
-      }
-    }
-  ],
-  "variable": [
-    {
-      "key": "baseUrl",
-      "value": ""
     }
   ]
 }
