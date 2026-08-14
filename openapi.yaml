@@ -90,54 +90,21 @@ paths:
 
 components:
   schemas:
-    UserCreate:
+    # ... Здесь остаются ваши текущие схемы (User, Order и т.д.) ...
+    User:
       type: object
-      required:
-        - name:
-        - email
       properties:
+        id:
+          type: integer
         name:
           type: string
-          example: Иван Петров
-        email:
-          type: string
-          format: email
-          example: ivan@example.com
 
-    UserUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-          example: Иван Сидоров
-        email:
-          type: string
-          format: email
-          example: newemail@example.com
-
-    OrderCreate:
-      type: object
-      required:
-        - user_id
-        - product_id
-        - quantity
-      properties:
-        user_id:
-          type: integer
-          example: 1
-        product_id:
-          type: integer
-          example: 1
-        quantity:
-          type: integer
-          example: 2
-components:
   securitySchemes:
     ApiKeyAuth:
-    type: apikey
-    in: header
-    name: X-API-key
-    description: "введите секретный ключ: my-secret-key-123"
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: "Введите секретный ключ: my-secret-key-123"
 
 security:
   - ApiKeyAuth: []
